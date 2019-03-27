@@ -1,0 +1,4 @@
+packageName: keycloak
+channels:
+  - name: release
+    currentCSV: keycloak-operator.v1.2.2
