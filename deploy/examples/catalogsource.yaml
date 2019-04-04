@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: integreatly-operator-registry
+  namespace: openshift-operator-lifecycle-manager
+spec:
+  image: quay.io/integreatly/operator-registry:v1.0.5
+  imagePullPolicy: Always
+  sourceType: grpc
