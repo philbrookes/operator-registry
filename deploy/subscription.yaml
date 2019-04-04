@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: integreatly
+spec:
+  channel: dev
+  name: integreatly
+  source: integreatly-operator-registry
+  sourceNamespace: openshift-operator-lifecycle-manager

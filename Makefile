@@ -1,6 +1,10 @@
 MOD_FLAGS := $(shell (go version | grep -q -E "1\.(11|12)") && echo -mod=vendor)
 CMDS  := $(addprefix bin/, $(shell go list $(MOD_FLAGS) ./cmd/... | xargs -I{} basename {}))
-
+REG := quay.io
+ORG := integreatly
+IMAGE := operator-registry
+TAG := v1.0.5
+IMAGE_NAME := $(REG)/$(ORG)/$(IMAGE):$(TAG)
 .PHONY: build test vendor clean
 
 all: clean test build
@@ -23,7 +27,12 @@ image:
 	docker build .
 
 image-upstream:
-	docker build -f upstream-example.Dockerfile .
+	docker build -t $(IMAGE_NAME) -f upstream-example.Dockerfile .
+
+image/upstream/push: image-upstream image/push
+
+image/push:
+	docker push $(IMAGE_NAME)
 
 vendor:
 	go mod vendor
