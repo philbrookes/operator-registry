@@ -3,7 +3,7 @@ CMDS  := $(addprefix bin/, $(shell go list $(MOD_FLAGS) ./cmd/... | xargs -I{} b
 REG := quay.io
 ORG := integreatly
 IMAGE := operator-registry
-TAG := v1.0.5
+TAG := v1.0.0
 IMAGE_NAME := $(REG)/$(ORG)/$(IMAGE):$(TAG)
 .PHONY: build test vendor clean
 

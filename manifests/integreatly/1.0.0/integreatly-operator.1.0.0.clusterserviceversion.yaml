@@ -10,6 +10,7 @@ spec:
   keywords: ['integreatly']
   version: 1.0.0
   maturity: alpha
+  minKubeVersion: 1.11.0
   maintainers:
     - name: Integr8ly
       email: integreatly-support@redhat.com
@@ -61,6 +62,7 @@ spec:
               verbs: ["get", "list", "watch"]
             - apiGroups: [""]
               resources:
+                - namespaces
                 - configmaps
               verbs: ["*"]
             - apiGroups:
