@@ -49,26 +49,83 @@ spec:
   install:
     strategy: deployment
     spec:
+      clusterPermissions:
+        - serviceAccountName: integreatly-operator
+          rules:
+            - apiGroups:
+                - ""
+              resources:
+                - namespaces
+              verbs:
+                - list
+                - create
+                - watch
+            - apiGroups:
+                - kafka.strimzi.io
+              resources:
+                - kafkas
+              verbs:
+                - get
+                - create
+            - apiGroups:
+                - operators.coreos.com
+              resources:
+                - subscriptions
+                - operatorgroups
+                - catalogsourceconfigs
+              verbs:
+                - list
+                - create
+                - watch
       permissions:
         - serviceAccountName: integreatly-operator
           rules:
-            - apiGroups: [""]
+            - apiGroups:
+                - ""
               resources:
-                - nodes
+                - pods
                 - services
                 - endpoints
-                - pods
+                - persistentvolumeclaims
+                - events
+                - configmaps
                 - secrets
-              verbs: ["get", "list", "watch"]
-            - apiGroups: [""]
+              verbs:
+                - "*"
+            - apiGroups:
+                - ""
               resources:
                 - namespaces
-                - configmaps
-              verbs: ["*"]
+              verbs:
+                - get
+            - apiGroups:
+                - apps
+              resources:
+                - deployments
+                - daemonsets
+                - replicasets
+                - statefulsets
+              verbs:
+                - "*"
+            - apiGroups:
+                - monitoring.coreos.com
+              resources:
+                - servicemonitors
+              verbs:
+                - get
+                - create
+            - apiGroups:
+                - apps
+              resourceNames:
+                - integreatly-operator
+              resources:
+                - deployments/finalizers
+              verbs:
+                - update
             - apiGroups:
                 - aerogear.org
               resources:
-                - installations
+                - "*"
               verbs:
                 - "*"
       deployments:
