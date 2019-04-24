@@ -36,7 +36,7 @@ spec:
     type: AllNamespaces
   customresourcedefinitions:
     owned:
-      - name: installations.integreatly.io
+      - name: installations.integreatly.org
         version: v1alpha1
         kind: Installation
         displayName: Integreatly Installation
@@ -122,7 +122,7 @@ spec:
               verbs:
                 - update
             - apiGroups:
-                - integreatly.io
+                - integreatly.org
               resources:
                 - "*"
               verbs:
